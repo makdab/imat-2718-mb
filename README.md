@@ -1,4 +1,4 @@
-# College Course Portal — IMAT2718 Integrated Project (prototype)
+# University of Tech Portal — IMAT2718 Integrated Project (prototype)
 
 A Django + SQLite prototype for a college course-management system: browse courses
 and modules, sign up / log in, and register (enrol) on courses.

@@ -15,7 +15,7 @@ PENDING_USER_SESSION_KEY = "pending_verification_user_id"
 def _send_verification_code(user, verification):
     """Email the six-digit code to the user (console backend in development)."""
     send_mail(
-        subject="Your College Course Portal verification code",
+        subject="Your University of Tech Portal verification code",
         message=(
             f"Hi {user.get_short_name() or user.username},\n\n"
             f"Your verification code is {verification.code}.\n"

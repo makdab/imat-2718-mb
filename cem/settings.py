@@ -139,7 +139,7 @@ LOGOUT_REDIRECT_URL = 'course_list'
 # straight to the runserver console — no SMTP account required. Swap in the SMTP
 # backend below and fill the EMAIL_HOST_* values to send real mail in production.
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-DEFAULT_FROM_EMAIL = 'College Course Portal <no-reply@cem.local>'
+DEFAULT_FROM_EMAIL = 'University of Tech Portal <no-reply@cem.local>'
 
 # Production example (move the secrets into environment variables):
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

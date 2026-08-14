@@ -4,13 +4,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}College Course Portal{% endblock %}</title>
+  <title>{% block title %}University of Tech Portal{% endblock %}</title>
   <link rel="stylesheet" href="{% static 'css/main.css' %}">
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="{% url 'course_list' %}">College Course Portal</a>
+      <a class="brand" href="{% url 'course_list' %}">University of Tech Portal</a>
       <nav class="nav">
         <a href="{% url 'course_list' %}">Courses</a>
         {% if user.is_authenticated %}
