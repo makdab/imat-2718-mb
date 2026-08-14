@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}{{ course.name }} — College Course Portal{% endblock %}
+
+{% block content %}
+  <p><a href="{% url 'course_list' %}">&larr; All courses</a></p>
+
+  <div class="page-head">
+    <div>
+      <p class="code">{{ course.code }}</p>
+      <h1>{{ course.name }}</h1>
+    </div>
+    <div class="page-head-action">
+      {% if user.is_authenticated %}
+        {% if is_enrolled %}
+          <span class="badge badge-ok">Registered</span>
+          <form action="{% url 'unenroll' course.pk %}" method="post" class="inline-form">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-secondary">Withdraw</button>
+          </form>
+        {% else %}
+          <form action="{% url 'enroll' course.pk %}" method="post" class="inline-form">
+            {% csrf_token %}
+            <button type="submit" class="btn">Register for this course</button>
+          </form>
+        {% endif %}
+      {% else %}
+        <a class="btn" href="{% url 'login' %}?next={{ request.path }}">Log in to register</a>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if course.description %}<p class="lead">{{ course.description }}</p>{% endif %}
+
+  <h2>Modules</h2>
+  <ul class="module-list">
+    {% for module in course.modules.all %}
+      <li>
+        <a href="{{ module.get_absolute_url }}">
+          <span class="code">{{ module.code }}</span>
+          <strong>{{ module.title }}</strong>
+        </a>
+        <p>{{ module.description|truncatewords:20 }}</p>
+      </li>
+    {% empty %}
+      <li>No modules have been added to this course yet.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Courses — College Course Portal{% endblock %}
+
+{% block content %}
+  <h1>Available courses</h1>
+  <p class="lead">Browse the college's courses and the modules they include.</p>
+
+  <div class="card-grid">
+    {% for course in courses %}
+      <article class="card">
+        <h2><a href="{{ course.get_absolute_url }}">{{ course.name }}</a></h2>
+        <p class="code">{{ course.code }}</p>
+        <p>{{ course.description|truncatewords:24 }}</p>
+        <p class="meta">{{ course.modules.count }} module{{ course.modules.count|pluralize }}</p>
+        <a class="btn" href="{{ course.get_absolute_url }}">View course</a>
+      </article>
+    {% empty %}
+      <p>No courses are available yet.</p>
+    {% endfor %}
+  </div>
+{% endblock %}

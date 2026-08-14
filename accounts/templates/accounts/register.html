@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Sign up — College Course Portal{% endblock %}
+
+{% block content %}
+  <div class="form-card">
+    <h1>Create an account</h1>
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="field">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% if field.help_text %}<small class="help">{{ field.help_text|safe }}</small>{% endif %}
+          {% for error in field.errors %}<small class="error">{{ error }}</small>{% endfor %}
+        </div>
+      {% endfor %}
+      {% for error in form.non_field_errors %}<p class="error">{{ error }}</p>{% endfor %}
+      <button type="submit" class="btn">Sign up</button>
+    </form>
+    <p class="form-alt">Already have an account? <a href="{% url 'login' %}">Log in</a>.</p>
+  </div>
+{% endblock %}

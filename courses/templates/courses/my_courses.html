@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}My Courses — College Course Portal{% endblock %}
+
+{% block content %}
+  <h1>My courses</h1>
+  <p class="lead">Courses you are currently registered on.</p>
+
+  <div class="card-grid">
+    {% for enrollment in enrollments %}
+      <article class="card">
+        <h2><a href="{{ enrollment.course.get_absolute_url }}">{{ enrollment.course.name }}</a></h2>
+        <p class="code">{{ enrollment.course.code }}</p>
+        <p class="meta">Registered {{ enrollment.enrolled_at|date:"j M Y" }}</p>
+        <form action="{% url 'unenroll' enrollment.course.pk %}" method="post" class="inline-form">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-secondary">Withdraw</button>
+        </form>
+      </article>
+    {% empty %}
+      <p>You are not registered on any courses yet. <a href="{% url 'course_list' %}">Browse courses</a>.</p>
+    {% endfor %}
+  </div>
+{% endblock %}
