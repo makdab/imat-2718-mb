@@ -23,3 +23,27 @@ class RegistrationForm(UserCreationForm):
         if User.objects.filter(email__iexact=email).exists():
             raise forms.ValidationError("An account with this email already exists.")
         return email
+
+
+class EmailVerificationForm(forms.Form):
+    """Collects the six-digit code we email during sign-up."""
+
+    code = forms.CharField(
+        label="Verification code",
+        min_length=6,
+        max_length=6,
+        widget=forms.TextInput(
+            attrs={
+                "inputmode": "numeric",
+                "autocomplete": "one-time-code",
+                "pattern": "[0-9]*",
+                "placeholder": "123456",
+            }
+        ),
+    )
+
+    def clean_code(self):
+        code = self.cleaned_data["code"].strip()
+        if not code.isdigit():
+            raise forms.ValidationError("The code is six digits.")
+        return code

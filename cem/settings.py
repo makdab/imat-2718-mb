@@ -133,3 +133,26 @@ AUTH_USER_MODEL = 'accounts.User'
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'course_list'
 LOGOUT_REDIRECT_URL = 'course_list'
+
+# Email
+# During development we print emails (password-reset links, verification codes)
+# straight to the runserver console — no SMTP account required. Swap in the SMTP
+# backend below and fill the EMAIL_HOST_* values to send real mail in production.
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = 'College Course Portal <no-reply@cem.local>'
+
+# Production example (move the secrets into environment variables):
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.example.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = ''
+# EMAIL_HOST_PASSWORD = ''
+
+# How long a password-reset link stays valid (seconds). Default is 3 days.
+PASSWORD_RESET_TIMEOUT = 60 * 60 * 24  # 1 day
+
+# How long an email-verification code stays valid (minutes) and how many
+# attempts are allowed before it is invalidated.
+EMAIL_OTP_TTL_MINUTES = 10
+EMAIL_OTP_MAX_ATTEMPTS = 5
